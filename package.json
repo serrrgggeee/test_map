@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/Foxandxss/angular-webpack-workflow",
   "dependencies": {
-    "angular": "^1.5.0"
+    "angular": "^1.5.0",
+    "firebase": "^3.6.10",
+    "google-maps": "^3.2.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
