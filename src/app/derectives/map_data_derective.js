@@ -58,7 +58,10 @@ let map_data = () => {
                         "type": type.val(),
                         "icon": icon.val()
                     }
-                })
+                });
+                $scope.$broadcast('map_data', $scope.scores);
+                console.log($scope.scores);
+                $scope.$broadcast('update');
             };
 
             $scope.$on('shift', function (e, shift) {

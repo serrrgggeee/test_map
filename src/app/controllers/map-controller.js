@@ -30,7 +30,13 @@ class mapCtrl {
             }
             this.initMapMake(this.$scope.map_data);
         }.bind(this));
-
+        this.$scope.$on('update', function (e, update) {
+            console.log(update);
+             while(this.markers.length){
+                this.markers.pop().setMap(null);
+            }
+            this.initMapMake(this.$scope.map_data);
+        }.bind(this));
     }
 
     initMap() {
@@ -114,6 +120,7 @@ class mapCtrl {
         }
         var resent = this.ref.push(data);
         var point = new google.maps.LatLng(data.lat, data.lng);
+
         var marker = new google.maps.Marker({
             position:point,
             map:this.map,
