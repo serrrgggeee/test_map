@@ -7,7 +7,7 @@ let map_data = () => {
             var ref = database.ref('scores');
             ref.on('value', gotData);
             var load_data = false;
-            $scope.type = 1;
+            $scope.type = '';
             $scope.$watch('type', function (type) {
                 $scope.$broadcast('type', type);
             });
@@ -65,10 +65,17 @@ let map_data = () => {
             };
 
             $scope.$on('shift', function (e, shift) {
+                var img = angular.element(document.querySelector('#img_'+shift.id));
+                var type = angular.element(document.querySelector('#type_'+shift.id));
+                var icon = angular.element(document.querySelector('#icon_'+shift.id));
                 ref.update({[shift.id]: {
                     "lng": shift.lng,
                     "lat": shift.lat,
                     "city": 'Волгоград',
+                    "img": img.val(),
+                    "type": type.val(),
+                    "icon": icon.val()
+
                     }
                 })
             });

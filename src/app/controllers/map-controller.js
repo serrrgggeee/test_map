@@ -63,6 +63,7 @@ class mapCtrl {
             this.data.lat = e.latLng.lat();
             this.data.lng = e.latLng.lng();
             this.data.city = 'москва';
+            this.data.type = 'library';
             this.initFirebase(this.data);
         }.bind(this));
     }
@@ -82,7 +83,7 @@ class mapCtrl {
                     icon: data[key].icon ? iconBase + data[key].icon :'',
                     id:key,
                     animation: google.maps.Animation.DROP,
-                    title: 'Hello World!'
+                    title: 'Hello World!',
                 });
 
                 this.markers.push(marker);
@@ -106,7 +107,8 @@ class mapCtrl {
     }
 
     dragendMake(marker) {
-        google.maps.event.addListener(marker, "dragstart", function (event) {
+        google.maps.event.addListener(marker, "drag", function (event) {
+            var id = marker.get("id");
             var lat = marker.getPosition().lat();
             var lng = marker.getPosition().lng();
             var shift = {id: id, lat: lat, lng: lng};
