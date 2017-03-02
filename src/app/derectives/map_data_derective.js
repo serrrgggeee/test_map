@@ -7,20 +7,27 @@ let map_data = () => {
             var ref = database.ref('scores');
             ref.on('value', gotData);
             var load_data = false;
+            $scope.type = 1;
+            $scope.$watch('type', function (type) {
+                $scope.$broadcast('type', type);
+            });
+
             ref.update({
                 "-KeAnp0vX56V6J7Y7Hrb": {
                     "city": "Волгоград",
                     "img": "http://www.volsu.ru/upload/medialibrary/5f8/z_fb5ee9ef.jpg",
                     "lat": "-34.45221847282653",
                     "lng": "-65.91796875",
-                    "type": 'parking_lot_maps.png'
+                    "icon": 'parking_lot_maps.png',
+                    "type": 'parking'
                 },
                 "-KeAnpBCV4sTY1yGyUh-": {
                     "city": "Волгоград",
                     "img": "http://www.volsu.ru/upload/medialibrary/5f8/z_fb5ee9ef.jpg",
                     "lat": "15.623036831528264",
                     "lng": "15.99609375",
-                    "type": 'library_maps.png'
+                    "icon": 'library_maps.png',
+                    "type": 'library'
                 }
             });
 
@@ -42,12 +49,14 @@ let map_data = () => {
                 var lat = angular.element(document.querySelector('#lat_'+data));
                 var img = angular.element(document.querySelector('#img_'+data));
                 var type = angular.element(document.querySelector('#type_'+data));
+                var icon = angular.element(document.querySelector('#icon_'+data));
                 ref.update({[data]: {
                         "city": name.val(),
                         "lng": lng.val(),
                         "lat": lat.val(),
                         "img": img.val(),
-                        "type": type.val()
+                        "type": type.val(),
+                        "icon": icon.val()
                     }
                 })
             };

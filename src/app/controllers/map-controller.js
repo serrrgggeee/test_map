@@ -22,11 +22,20 @@ class mapCtrl {
         };
         this.markers = [];
         this.initMap();
+        this.$scope.type = '';
+        this.$scope.$on('type', function (e, type) {
+            this.$scope.type = type;
+             while(this.markers.length){
+                this.markers.pop().setMap(null);
+            }
+            this.initMapMake(this.$scope.map_data);
+        }.bind(this));
 
     }
 
     initMap() {
         this.$scope.$on('map_data', function (e, data) {
+            this.$scope.map_data = data;
             this.initMapMake(data);
         }.bind(this));
         this.map = new google.maps.Map(document.getElementById('map'), {
@@ -59,12 +68,12 @@ class mapCtrl {
 
         var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         for (var key in data) {
-                if (data[key].type) {
+                if (data[key].type  && data[key].type == this.$scope.type) {
 
                 var marker = new google.maps.Marker({
                     draggable:true,
                     map: this.map,
-                    icon: data[key].type ? iconBase + data[key].type :'',
+                    icon: data[key].icon ? iconBase + data[key].icon :'',
                     id:key,
                     animation: google.maps.Animation.DROP,
                     title: 'Hello World!'
@@ -92,8 +101,6 @@ class mapCtrl {
 
     dragendMake(marker) {
         google.maps.event.addListener(marker, "dragstart", function (event) {
-            var id = marker.get("id");
-            console.log(id);
             var lat = marker.getPosition().lat();
             var lng = marker.getPosition().lng();
             var shift = {id: id, lat: lat, lng: lng};

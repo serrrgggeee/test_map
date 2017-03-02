@@ -1,9 +1,11 @@
+<h3>Метки</h3>
 <div ng-repeat="(key, obj) in scores">
 
   <input id="name_{{key}}" value="{{obj.city}}">
   <input id="lat_{{key}}" value="{{obj.lat}}">
   <input id="lng_{{key}}" value="{{obj.lng}}">
   <input id="img_{{key}}" value="{{obj.img}}">
+  <input id="icon_{{key}}" value="{{obj.icon}}">
   <input id="type_{{key}}" value="{{obj.type}}">
   <button ng-click="update_map_data(key)">обновить</button>
   <button ng-click="delete_map_data(key)">удалить</button>

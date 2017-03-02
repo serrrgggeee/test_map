@@ -1,5 +1,14 @@
 <main>
 <div id="map"></div>
-<div>{{ url }}   dfdfdff </div>
-</main>
 
+</main>
+<h3>Фильтр</h3>
+<form name="testForm">
+  <input ng-model="type" ng-pattern="/^\d+$/" name="anim" class="my-input"
+         aria-describedby="inputDescription" />
+  <select name="singleSelect" id="singleSelect" ng-model="type">
+      <option value="">---выбирите тип---</option>
+      <option value="parking">parking</option>
+      <option value="library">library</option>
+    </select>
+</form>
